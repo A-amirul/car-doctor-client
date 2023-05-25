@@ -6,6 +6,8 @@ import SignUp from "../pages/Home/Home/SignUp/SignUp";
 import BookService from "../pages/BookService/BookService";
 import Bookings from "../pages/Bookings/Bookings";
 import PrivateRoutes from "./PrivateRoutes";
+import About from "../pages/Home/About/About";
+import Blog from "../pages/Home/Blog/Blog";
 
 const router = createBrowserRouter([
 	{
@@ -14,20 +16,28 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element:<Home></Home>
+				element: <Home></Home>
+			},
+			{
+				path: "/about",
+				element:<About></About>
+			},
+			{
+				path: "/blog",
+				element:<Blog></Blog>
 			},
 			{
 				path: '/login',
-				element:<Login></Login>
+				element: <Login></Login>
 			},
 			{
 				path: '/signup',
-				element:<SignUp></SignUp>
+				element: <SignUp></SignUp>
 			},
 			{
 				path: "/book/:id",
-				element: <BookService></BookService>,
-				loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+				element: <PrivateRoutes><BookService></BookService></PrivateRoutes>,
+				loader: ({ params }) => fetch(`https://car-doctor-server-three-ashen.vercel.app/services/${params.id}`)
 			},
 			{
 				path: 'bookings',
